@@ -1,0 +1,61 @@
+@value colors: "../../sharedCss/variables/colors.css";
+@value defaultPrimaryColor, secondaryTextColor, dividerColor from colors;
+
+.group {
+  position: relative;
+  margin-bottom: 45px;
+}
+
+input {
+  font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.1em;
+  padding: 0.6em 0.6em 0.6em 0.6em;
+  display: block;
+  width: 16.8em;
+  border: none;
+  border-bottom: 0.1em solid dividerColor;
+}
+
+input:focus {
+  outline: none;
+}
+
+label {
+  color: secondaryTextColor;
+  font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.1em;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 0.3em;
+  top: 0.6em;
+  transition: 0.2s ease all;
+}
+
+input:focus ~ label, input:valid ~ label {
+  top: -1.2em;
+  font-size: 0.9em;
+  color: defaultPrimaryColor;
+}
+
+/* Bottom bar */
+.bar {
+  position: relative;
+  display: block;
+  width: 18.5em;
+}
+
+.bar:before {
+  content: '';
+  height: 0.1em;
+  width: 0;
+  bottom: 0.0em;
+  position: absolute;
+  background: defaultPrimaryColor;
+  transition: 0.3s ease all;
+}
+
+/* bar expands while input is active */
+input:focus ~ .bar:before{
+  width: 100%;
+}

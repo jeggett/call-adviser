@@ -1,0 +1,34 @@
+@value colors: "../../sharedCss/variables/colors.css";
+@value defaultPrimaryColor, lightPrimaryColor from colors;
+
+.buttonWrapper {
+  width: 100%;
+  text-align: center;
+  margin: 4em 0;
+}
+
+.button {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0.25em 2em;
+  margin: 0;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -webkit-touch-callout: none;
+  user-select: none;
+  cursor: pointer;
+  outline: 0;
+  font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  border: 2px solid defaultPrimaryColor;
+  color: defaultPrimaryColor;
+}
+
+.button:active {
+  background: defaultPrimaryColor;
+  color: #FFF;
+}
+
+.button:hover:not(:active) {
+  background-color: lightPrimaryColor;
+}
