@@ -13,6 +13,7 @@ import selectSignUp from './selectors'; // ???
 
 import TextField from 'components/TextField';
 import Button from 'components/Button';
+import Logo from 'components/Logo';
 
 import styles from './styles.css';
 
@@ -40,9 +41,10 @@ export class SignUp extends React.Component { // eslint-disable-line react/prefe
 
   render() {
     return (
-      <div className={ styles.signUp }>
+      <div className={styles.signUp}>
         <div className={styles.card}>
           <form action="">
+            <Logo />
             <TextField type="email">Email</TextField>
             <TextField type="password">Password</TextField>
             <Button>Sign In</Button>

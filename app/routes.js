@@ -14,6 +14,8 @@ const loadModule = (cb) => (componentModule) => {
   cb(null, componentModule.default);
 };
 
+// TODO add /main/settings, /main/new, /main/log, /main/dialogtrees
+
 export default function createRoutes(store) {
   // Create reusable async injectors using getHooks factory
   const { injectReducer, injectSagas } = getHooks(store);
@@ -35,7 +37,7 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    },    {
+    }, {
       path: '/signup',
       name: 'signUp',
       getComponent(nextState, cb) {
@@ -54,8 +56,27 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '*',
+      path: '/main',
+      name: 'mainPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/MainPage/reducer'),
+          System.import('containers/MainPage/sagas'),
+          System.import('containers/MainPage'),
+        ]);
 
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('mainPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
         System.import('containers/NotFoundPage')

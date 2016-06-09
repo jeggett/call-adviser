@@ -1,13 +1,13 @@
 /*
 import {
-  selectSignUp,
+  selectHeadline,
 } from '../selectors';
 import { fromJS } from 'immutable';
 import expect from 'expect';
 
-const selector = selectSignUp();
+const selector = selectHeadline();
 
-describe('selectSignUp', () => {
+describe('selectHeadline', () => {
 
 });
 */

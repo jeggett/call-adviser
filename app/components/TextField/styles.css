@@ -3,7 +3,8 @@
 
 .group {
   position: relative;
-  margin-bottom: 45px;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 input {

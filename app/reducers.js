@@ -39,10 +39,16 @@ function routeReducer(state = routeInitialState, action) {
  * Creates the main reducer with the asynchronously loaded ones
  */
 import signUpReducer from 'containers/SignUp/reducer';
+import mainPageReducer from 'containers/MainPage/reducer';
+import headlineReducer from 'containers/Headline/reducer';
+import navPanelReducer from 'containers/NavPanel/reducer';
 export default function createReducer(asyncReducers) {
   return combineReducers({
     route: routeReducer,
     signUp: signUpReducer,
+    mainPage: mainPageReducer,
+    headline: headlineReducer,
+    navPanel: navPanelReducer,
     ...asyncReducers,
   });
 }

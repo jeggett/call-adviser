@@ -4,20 +4,17 @@
 *
 */
 
-import React, { Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import styles from './styles.css';
 
-class TextField extends Component{
+class TextField extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div className={this.props.className}>
-        <div className={styles.group}>
-          <input type={this.props.type} required="true" />
-          <span className={styles.highlight} />
-          <span className={styles.bar} />
-          <label>{this.props.children}</label>
-        </div>
+      <div className={styles.group}>
+        <input type={this.props.type} required="true" />
+        <span className={styles.bar} />
+        <label>{this.props.children}</label>
       </div>
     );
   }

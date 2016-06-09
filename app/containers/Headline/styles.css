@@ -1,0 +1,37 @@
+@value colors: "../../sharedCss/variables/colors.css";
+@value defaultPrimaryColor, darkPrimaryColor, dividerColor, textPrimaryColor, accentColor, primaryTextColor from colors;
+
+.headline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: defaultPrimaryColor;
+  color: textPrimaryColor;
+  font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  font-weight: 300;
+}
+
+.logo {
+  width: 10em;
+  height: 10em;
+}
+
+.email {
+  margin-right: 2em;
+}
+
+.menu {
+  display: flex;
+}
+
+a {
+  display: block;
+  margin: 0 1em;
+}
+
+a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

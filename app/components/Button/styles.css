@@ -1,10 +1,10 @@
 @value colors: "../../sharedCss/variables/colors.css";
-@value defaultPrimaryColor, lightPrimaryColor from colors;
+@value defaultPrimaryColor,darkPrimaryColor, accentColor, lightPrimaryColor from colors;
 
 .buttonWrapper {
   width: 100%;
   text-align: center;
-  margin: 4em 0;
+  margin: 1em 0;
 }
 
 .button {
@@ -24,11 +24,13 @@
   color: defaultPrimaryColor;
 }
 
-.button:active {
-  background: defaultPrimaryColor;
+.button:hover {
+  background-color: defaultPrimaryColor;
   color: #FFF;
 }
 
-.button:hover:not(:active) {
-  background-color: lightPrimaryColor;
+.button:active {
+  background: darkPrimaryColor;
+  color: #FFF;
 }
+

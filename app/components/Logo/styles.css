@@ -1,3 +1,7 @@
 .logo {
-
+  display: block;
+  width: 10em;
+  height: 3em;
+  background: url("http://placehold.it/200x60") center center no-repeat;
+  background-size: contain;
 }

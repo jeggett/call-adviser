@@ -4,25 +4,25 @@
  *
  */
 
-import React, {Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import styles from './styles.css';
 
-class Button extends Component {
+class Button extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     const className = this.props.className ? this.props.className : styles.button;
 
-    // Render an anchor tag
+    // Render a button
     let button = (
-      <a
+      <button
         className={className} href={this.props.href}
         onClick={this.props.onClick}
       >
         {this.props.children}
-      </a>
+      </button>
     );
 
-    // If the button have the handleroot prop we want to render a button
+    // If the button have the handleroot prop
     if (this.props.handleRoute) {
       button = (
         <button
@@ -33,7 +33,6 @@ class Button extends Component {
         </button>
       );
     }
-
 
     return (
       <div className={styles.buttonWrapper}>
