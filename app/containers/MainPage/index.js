@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import selectMainPage from './selectors';
 
@@ -22,11 +22,10 @@ export class MainPage extends React.Component { // eslint-disable-line react/pre
           <NavPanel />
           <section className={styles.subpage}>
             <header className={styles.subpage_header}>
-              Call Log... whatever
+              Subpage name
             </header>
             <main className={styles.subpage_main}>
               {this.props.children}
-              this.props.children
             </main>
             <footer className={styles.subpage_footer}>
               Copyright, etc.
@@ -37,6 +36,10 @@ export class MainPage extends React.Component { // eslint-disable-line react/pre
     );
   }
 }
+
+MainPage.propTypes = {
+  children: PropTypes.node,
+};
 
 const mapStateToProps = selectMainPage();
 

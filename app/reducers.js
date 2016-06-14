@@ -42,6 +42,10 @@ import signUpReducer from 'containers/SignUp/reducer';
 import mainPageReducer from 'containers/MainPage/reducer';
 import headlineReducer from 'containers/Headline/reducer';
 import navPanelReducer from 'containers/NavPanel/reducer';
+import newCallPageReducer from 'containers/NewCallPage/reducer';
+import settingsPageReducer from 'containers/SettingsPage/reducer';
+import logPageReducer from 'containers/LogPage/reducer';
+import dialogTreesPageReducer from 'containers/DialogTreesPage/reducer';
 export default function createReducer(asyncReducers) {
   return combineReducers({
     route: routeReducer,
@@ -49,6 +53,10 @@ export default function createReducer(asyncReducers) {
     mainPage: mainPageReducer,
     headline: headlineReducer,
     navPanel: navPanelReducer,
+    newCallPage: newCallPageReducer,
+    settingsPage: settingsPageReducer,
+    logPage: logPageReducer,
+    dialogTreesPage: dialogTreesPageReducer,
     ...asyncReducers,
   });
 }

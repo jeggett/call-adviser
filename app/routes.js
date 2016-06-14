@@ -14,7 +14,7 @@ const loadModule = (cb) => (componentModule) => {
   cb(null, componentModule.default);
 };
 
-// TODO add /main/settings, /main/new, /main/log, /main/dialogtrees
+// TODO add /main/settings, /main/new, /main/log, /main/trees
 
 export default function createRoutes(store) {
   // Create reusable async injectors using getHooks factory
@@ -58,18 +58,104 @@ export default function createRoutes(store) {
     }, {
       path: '/main',
       name: 'mainPage',
+
+      childRoutes: [
+        {
+          path: '/main/new',
+          name: 'newCallPage',
+          getComponent(nextState, cb) {
+            const importModules = Promise.all([
+              System.import('containers/NewCallPage/reducer'),
+              System.import('containers/NewCallPage/sagas'),
+              System.import('containers/NewCallPage'),
+            ]);
+
+            const renderRoute = loadModule(cb);
+
+            importModules.then(([reducer, sagas, component]) => {
+              injectReducer('newCallPage', reducer.default);
+              injectSagas(sagas.default);
+              renderRoute(component);
+            });
+
+            importModules.catch(errorLoading);
+          },
+        },
+
+        {
+          path: '/main/settings',
+          name: 'settingsPage',
+          getComponent(nextState, cb) {
+            const importModules = Promise.all([
+              System.import('containers/SettingsPage/reducer'),
+              System.import('containers/SettingsPage/sagas'),
+              System.import('containers/SettingsPage'),
+            ]);
+
+            const renderRoute = loadModule(cb);
+
+            importModules.then(([reducer, sagas, component]) => {
+              injectReducer('settingsPage', reducer.default);
+              injectSagas(sagas.default);
+              renderRoute(component);
+            });
+
+            importModules.catch(errorLoading);
+          },
+        },
+        {
+          path: '/main/log',
+          name: 'logPage',
+          getComponent(nextState, cb) {
+            const importModules = Promise.all([
+              System.import('containers/LogPage/reducer'),
+              System.import('containers/LogPage/sagas'),
+              System.import('containers/LogPage'),
+            ]);
+
+            const renderRoute = loadModule(cb);
+
+            importModules.then(([reducer, sagas, component]) => {
+              injectReducer('logPage', reducer.default);
+              injectSagas(sagas.default);
+              renderRoute(component);
+            });
+
+            importModules.catch(errorLoading);
+          },
+        }, {
+          path: '/main/trees',
+          name: 'dialogTreesPage',
+          getComponent(nextState, cb) {
+            const importModules = Promise.all([
+              System.import('containers/DialogTreesPage/reducer'),
+              System.import('containers/DialogTreesPage/sagas'),
+              System.import('containers/DialogTreesPage'),
+            ]);
+
+            const renderRoute = loadModule(cb);
+
+            importModules.then(([reducer, sagas, component]) => {
+              injectReducer('dialogTreesPage', reducer.default);
+              injectSagas(sagas.default);
+              renderRoute(component);
+            });
+
+            importModules.catch(errorLoading);
+          },
+        },
+      ],
+
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           System.import('containers/MainPage/reducer'),
-          System.import('containers/MainPage/sagas'),
           System.import('containers/MainPage'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
+        importModules.then(([reducer, component]) => {
           injectReducer('mainPage', reducer.default);
-          injectSagas(sagas.default);
           renderRoute(component);
         });
 
@@ -77,6 +163,7 @@ export default function createRoutes(store) {
       },
     }, {
       path: '*',
+
       name: 'notfound',
       getComponent(nextState, cb) {
         System.import('containers/NotFoundPage')
