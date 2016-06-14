@@ -4,13 +4,20 @@ const express = require('express');
 const logger = require('./logger');
 const ngrok = require('ngrok');
 
+const morgan = require('morgan');
+
 const frontend = require('./middlewares/frontendMiddleware');
 const isDev = process.env.NODE_ENV !== 'production';
 
+const apiVersion1 = require('./api1.js');
+
 const app = express();
 
-// If you need a backend, e.g. an API, add your custom backend-specific middleware here
-// app.use('/api', myApi);
+if (isDev) {
+  app.use(morgan('combined'));
+}
+
+app.use('/apiv1', apiVersion1);
 
 // Initialize frontend middleware that will serve your JS app
 const webpackConfig = isDev
