@@ -13,13 +13,13 @@ exports.signup = function signupRequestHandler(req, res, next) {
   const emailRegexp = /^[^@]+@[^@]+\.[^@]+$/i;
   if (!emailRegexp.test(email)) {
     res.send({ error: 'Email has invalid format' });
-    return
+    return;
   }
 
   // Password contains at least: one upper-, one lowercase
   // english letter, one digit, one special char, >= 8 length
   const passwordRegexp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-  if(!passwordRegexp.test(password)) {
+  if (!passwordRegexp.test(password)) {
     res.send({ error: 'Password is invalid' });
     return;
   }
