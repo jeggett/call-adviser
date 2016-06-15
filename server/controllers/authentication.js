@@ -4,6 +4,26 @@ exports.signup = function signupRequestHandler(req, res, next) {
   const email = req.body.email;
   const password = req.body.password;
 
+  if (!email || !password) {
+    res.status(422);
+    res.send({ error: 'You must provide email and password' });
+    return;
+  }
+
+  const emailRegexp = /^[^@]+@[^@]+\.[^@]+$/i;
+  if (!emailRegexp.test(email)) {
+    res.send({ error: 'Email has invalid format' });
+    return
+  }
+
+  // Password contains at least: one upper-, one lowercase
+  // english letter, one digit, one special char, >= 8 length
+  const passwordRegexp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+  if(!passwordRegexp.test(password)) {
+    res.send({ error: 'Password is invalid' });
+    return;
+  }
+
   // See if the user with the given email exists.
   // ExistingUser is null if the user not found
   User.findOne({ email }, (err, existingUser) => {
