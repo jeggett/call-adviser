@@ -58,7 +58,6 @@ export default function createRoutes(store) {
     }, {
       path: '/main',
       name: 'mainPage',
-
       childRoutes: [
         {
           path: '/main/new',

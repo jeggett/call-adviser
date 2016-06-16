@@ -1,5 +1,5 @@
 @value colors: "../../sharedCss/variables/colors.css";
-@value defaultPrimaryColor, dividerColor from colors;
+@value defaultPrimaryColor, darkPrimaryColor, dividerColor, textPrimaryColor, accentColor, primaryTextColor, lightPrimaryColor from colors;
 
 .mainPage {
   display: flex;
@@ -31,4 +31,50 @@ main {
 
 .subpage_footer {
   border-top: 0.1em solid dividerColor;
+}
+
+.navPanel {
+  box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, 0.4);
+  border-right: 0.1em solid #ccc;
+  border-bottom: 0.1em solid #ccc;
+  margin-right: 0.5em;
+  padding: 0;
+}
+
+/* Buttons on nav. panel */
+.buttons {
+  padding: 0 1em;
+}
+
+/* Links on navigation panel*/
+.link {
+  color: #000;
+  font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  margin: 0;
+  cursor: pointer;
+  padding: 0.5em 0 0.5em 1em;
+  border-left: 0.3em solid #fff;
+  text-decoration: none;
+}
+.link:hover:not(:focus) {
+  text-decoration: none;
+  background-color: lightPrimaryColor;
+  border-left: 0.3em solid lightPrimaryColor;
+}
+
+.link:focus {
+  text-decoration: none;
+}
+
+.link:active {
+  background-color: defaultPrimaryColor;
+  border-left: 0.3em solid defaultPrimaryColor;
+  color: #fff;
+}
+.active {
+  font-weight: 500;
+  color: defaultPrimaryColor;
+  border-left: 0.3em solid darkPrimaryColor;
+  background-color: #efefef;
 }
