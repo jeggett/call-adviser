@@ -31,6 +31,34 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
   });
 });
 
+const localOptions = { usernameField: 'email' };
+const localLogin = new LocalStrategy(localOptions,
+  (email, password, done) => {
+    User.findOne({ email }, (err, user) => {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false);
+      }
 
-// Tell passport to use this strategy
+      // compare passwords
+      user.comparePassword(password, (errCompare, isMatch) => {
+        if (errCompare) {
+          return done(errCompare);
+        }
+        if (!isMatch) {
+          return done(null, false);
+        }
+
+        return done(null, user);
+      });
+
+      return undefined;
+    });
+  }
+);
+
+// Tell passport to use strategy
 passport.use(jwtLogin);
+passport.use(localLogin);

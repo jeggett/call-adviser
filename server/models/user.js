@@ -22,14 +22,12 @@ userSchema.pre('save', (next) => {
 
   bcrypt.genSalt(10, (err, salt) => {
     if (err) {
-      next(err);
-      return;
+      return next(err);
     }
 
     bcrypt.hash(user.password, salt, null, (errHash, hash) => {
       if (errHash) {
-        next(errHash);
-        return;
+        return next(errHash);
       }
 
       // Overwrite plain text password with encrypted password
@@ -38,6 +36,16 @@ userSchema.pre('save', (next) => {
     });
   });
 });
+
+userSchema.methods.comparePassword = function (candidatePassword, callback) {
+  bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+    if (err) {
+      return callback(err);
+    }
+
+    callback(null, isMatch);
+  });
+};
 
 // Create model class (constructor for documents)
 // which corresponds to a collection `users`
