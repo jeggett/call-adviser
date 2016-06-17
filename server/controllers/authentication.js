@@ -35,15 +35,13 @@ exports.signup = function signupRequestHandler(req, res, next) {
   // ExistingUser is null if the user not found
   User.findOne({ email }, (err, existingUser) => {
     if (err) {
-      next(err);
-      return;
+      return next(err);
     }
 
     // If a user with a email does exist return an error
     if (existingUser) {
       res.status(422); // 422 - unprocessable entity
-      res.send({ error: 'This email is already in use' });
-      return;
+      return res.send({ error: 'This email is already in use' });
     }
 
     // If a user with email does not exist create and
@@ -51,12 +49,20 @@ exports.signup = function signupRequestHandler(req, res, next) {
     const user = new User({ email, password });
     user.save(errSave => {
       if (errSave) {
-        next(errSave);
-        return;
+        return next(errSave);
       }
 
       // Respond to request indicating the user was created
       res.json({ token: tokenForUser(user) });
     });
   });
+};
+
+exports.signin = function signInRequestHandler(req, res, next) {
+  // User has already had their email and password authorized
+  // so we just need to give them a token
+
+  // When we called done(null, user) in 'local' strategy
+  // Passport.js populated req with user model instance
+  res.send({ token: tokenForUser(req.user) });
 };

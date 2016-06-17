@@ -8,15 +8,15 @@ const userSchema = new Schema({
     type: String,
     unique: true,
     lowercase: true,
-    required: true,
+    // required: true,
   },
   password: {
     type: String,
-    required: true,
+    // required: true,
   },
 });
 
-userSchema.pre('save', (next) => {
+userSchema.pre('save', function preSaveHook(next) {
   // Context is the user model
   const user = this;
 
@@ -32,18 +32,22 @@ userSchema.pre('save', (next) => {
 
       // Overwrite plain text password with encrypted password
       user.password = hash;
-      next();
+      return next();
     });
+    
+    return undefined;
   });
 });
 
-userSchema.methods.comparePassword = function (candidatePassword, callback) {
+userSchema.methods.comparePassword = function comparePassword(candidatePassword, callback) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
     if (err) {
       return callback(err);
     }
 
     callback(null, isMatch);
+    
+    return undefined;
   });
 };
 
