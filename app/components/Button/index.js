@@ -22,7 +22,7 @@ class Button extends Component { // eslint-disable-line react/prefer-stateless-f
       </button>
     );
 
-    // If the button have the handleroot prop
+    // If the button have the handleRoute prop
     if (this.props.handleRoute) {
       button = (
         <button

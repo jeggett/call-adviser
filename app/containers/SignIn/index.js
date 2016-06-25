@@ -1,6 +1,6 @@
 /*
  *
- * SignUp
+ * SignIn
  *
  */
 
@@ -9,9 +9,8 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { Field, reduxForm } from 'redux-form/immutable';
-import validate from './validate';
 
-import selectSignUp from './selectors'; // ???
+import selectSignIn from './selectors';
 
 import TextField from 'components/TextField';
 import Button from 'components/Button';
@@ -19,7 +18,7 @@ import Logo from 'components/Logo';
 
 import styles from './styles.css';
 
-export class SignUp extends Component { // eslint-disable-line react/prefer-stateless-function
+export class SignIn extends Component { // eslint-disable-line react/prefer-stateless-function
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
@@ -39,10 +38,10 @@ export class SignUp extends Component { // eslint-disable-line react/prefer-stat
   handleFormSubmit(map) {
     console.log(map.get('email'), map.get('password'));
   }
-  
+
   render() {
     const { handleSubmit, submitting } = this.props;
-    
+
     return (
       <div className={styles.signUp}>
         <div className={styles.card}>
@@ -50,7 +49,7 @@ export class SignUp extends Component { // eslint-disable-line react/prefer-stat
             <Logo />
             <Field name="email" type="text" component={TextField} label="Email" />
             <Field name="password" type="password" component={TextField} label="Password" />
-            <Button disabled={submitting}>Sign Up</Button>
+            <Button disabled={submitting}>Sign In</Button>
           </form>
         </div>
       </div>
@@ -58,13 +57,13 @@ export class SignUp extends Component { // eslint-disable-line react/prefer-stat
   }
 }
 
-SignUp.propTypes = {
-  changeRoute: PropTypes.func,
+SignIn.propTypes = {
+  changeRoute: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = selectSignUp();
+const mapStateToProps = selectSignIn();
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -74,7 +73,6 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   reduxForm({
-    form: 'signup',
-    validate,
-  })(SignUp)
+    form: 'signin',
+  })(SignIn)
 );

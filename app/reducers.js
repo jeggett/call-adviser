@@ -7,6 +7,9 @@ import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
+import { reducer as reduxFormReducer } from 'redux-form/immutable';
+
+
 /*
  * routeReducer
  *
@@ -45,9 +48,11 @@ import newCallPageReducer from 'containers/NewCallPage/reducer';
 import settingsPageReducer from 'containers/SettingsPage/reducer';
 import logPageReducer from 'containers/LogPage/reducer';
 import dialogTreesPageReducer from 'containers/DialogTreesPage/reducer';
+import signInReducer from 'containers/SignIn/reducer';
 export default function createReducer(asyncReducers) {
   return combineReducers({
     route: routeReducer,
+    form: reduxFormReducer,
     signUp: signUpReducer,
     mainPage: mainPageReducer,
     headline: headlineReducer,
@@ -55,6 +60,7 @@ export default function createReducer(asyncReducers) {
     settingsPage: settingsPageReducer,
     logPage: logPageReducer,
     dialogTreesPage: dialogTreesPageReducer,
+    signIn: signInReducer,
     ...asyncReducers,
   });
 }

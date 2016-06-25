@@ -60,3 +60,9 @@ input:focus ~ label, input:valid ~ label {
 input:focus ~ .bar:before{
   width: 100%;
 }
+
+.error {
+  font-size: 1em;
+  color: #cb5e50;
+  width: 16.8em;
+}

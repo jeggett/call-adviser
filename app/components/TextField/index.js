@@ -12,9 +12,12 @@ class TextField extends Component { // eslint-disable-line react/prefer-stateles
   render() {
     return (
       <div className={styles.group}>
-        <input type={this.props.type} required="true" />
+        {/* required="true" is necessary for this to work, so do not delete */}
+        {/* see https://scotch.io/tutorials/google-material-design-input-boxes-in-css3 */}
+        <input {...this.props} required="true" />
         <span className={styles.bar} />
-        <label>{this.props.children}</label>
+        <label>{this.props.label}</label>
+        {this.props.touched && this.props.error && <div className={styles.error}>{this.props.error}</div>}
       </div>
     );
   }
@@ -23,6 +26,8 @@ class TextField extends Component { // eslint-disable-line react/prefer-stateles
 TextField.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  touched: PropTypes.bool.isRequired,
+  error: PropTypes.string,
 };
 export default TextField;
